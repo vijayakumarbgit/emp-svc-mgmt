@@ -77,7 +77,8 @@ public class EmpController {
 
 	@GetMapping("")
 	public List<Employee> getEmps() {
-
+        
+		list.addAll(impl.getEmployees());
 		return list;
 	}
 
@@ -95,7 +96,7 @@ public class EmpController {
 	@PostMapping("")
 	public String AddEmp(@RequestBody Employee e) {
 		list.add(e);
-		// employeeRepository.save(e);
+		impl.AddEmp(e);
 		return "Looks employee addedd successfully please check by retrieving with emp id";
 
 	}
