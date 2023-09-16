@@ -1,6 +1,7 @@
 package com.emp.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,14 +18,30 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public List<Employee> getEmployees() {
-		// TODO Auto-generated method stub
+
 		return employeeRepository.findAll();
 	}
 
 	@Override
-	public Employee AddEmp(Employee e) {
-		// TODO Auto-generated method stub
+	public Employee addEmp(Employee e) {
+
 		return employeeRepository.save(e);
 	}
 
+	@Override
+	public void delEmp(int id) {
+
+		employeeRepository.deleteById(id);
+	}
+
+	@Override
+	public Employee updateEmp(Employee e) {
+
+		int id = e.getId();
+		Optional<Employee> emp = employeeRepository.findById(id);
+		if (emp.isPresent()) {
+			return employeeRepository.save(e);
+		}
+		return null;
+	}
 }
